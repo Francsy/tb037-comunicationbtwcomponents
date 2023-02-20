@@ -1,23 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header'
+import Main from './components/Main'
+import Footer from './components/Footer'
+import { emailContext } from './context/emailContext'
+import { useState } from 'react'
 
 function App() {
+  
+  const [email, setEmail] = useState('')
+  const setNewEmail = (email) => setEmail(email);
+
+  const emailData = {
+    email,
+    setNewEmail
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <emailContext.Provider value={emailData} >
+        <Header />
+        <Main />
+      </emailContext.Provider>
+      <Footer />
     </div>
   );
 }
